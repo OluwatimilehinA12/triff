@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in to Facebook</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --facebook-blue: #1877f2;
+            --facebook-green: #42b72a;
+            --facebook-dark: #1c1e21;
+            --facebook-light: #f0f2f5;
+        }
+        
+        body {
+            background-color: var(--facebook-light);
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .logo {
+            color: var(--facebook-blue);
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .login-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+        
+        .btn-facebook {
+            background-color: var(--facebook-blue);
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .btn-facebook:hover {
+            background-color: #166fe5;
+            color: white;
+        }
+        
+        .btn-create {
+            background-color: var(--facebook-green);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .btn-create:hover {
+            background-color: #36a420;
+            color: white;
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(24, 119, 242, 0.25);
+            border-color: var(--facebook-blue);
+        }
+        
+        .divider {
+            border-bottom: 1px solid #dadde1;
+            margin: 20px 0;
+        }
+        
+        .footer-link {
+            color: #8a8d91;
+            font-size: 0.8rem;
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        
+        .language-selector {
+            color: #8a8d91;
+            font-size: 0.8rem;
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center mb-5">
+                <div class="logo">facebook</div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-card p-4">
+                    <h2 class="text-center mb-4">Log in to Facebook</h2>
+                    
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control form-control-lg" placeholder="Email address or phone number">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <input type="password" class="form-control form-control-lg" placeholder="Password">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-facebook btn-lg w-100 mb-3">Log in</button>
+                        
+                        <div class="text-center mb-3">
+                            <a href="#" class="text-decoration-none">Forgotten account?</a>
+                        </div>
+                        
+                        <div class="divider"></div>
+                        
+                        <div class="text-center">
+                            <a href="#" class="btn btn-create btn-lg">Create new account</a>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <p class="language-selector">
+                        English (UK) · Hausa · Français (France) · Português (Brazil) · Español · Júnior · Bahasa Indonesia · Deutsch · El-État · Italiano · Red
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                        <a href="#" class="footer-link">Sign Up</a>
+                        <a href="#" class="footer-link">Log In</a>
+                        <a href="#" class="footer-link">Messenger</a>
+                        <a href="#" class="footer-link">Facebook Lite</a>
+                        <a href="#" class="footer-link">Video</a>
+                        <a href="#" class="footer-link">Meta Pay</a>
+                        <a href="#" class="footer-link">Meta Store</a>
+                        <a href="#" class="footer-link">Meta Quest</a>
+                        <a href="#" class="footer-link">Ray-Ban Meta</a>
+                        <a href="#" class="footer-link">Meta AI</a>
+                        <a href="#" class="footer-link">Instagram</a>
+                        <a href="#" class="footer-link">Thesaks</a>
+                    </div>
+                    
+                    <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                        <a href="#" class="footer-link">Voting Information Centre</a>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Privacy Centre</a>
+                        <a href="#" class="footer-link">About</a>
+                        <a href="#" class="footer-link">Create ad</a>
+                        <a href="#" class="footer-link">Create Page</a>
+                        <a href="#" class="footer-link">Developers</a>
+                        <a href="#" class="footer-link">Careers</a>
+                        <a href="#" class="footer-link">Cookies</a>
+                        <a href="#" class="footer-link">AdChoices</a>
+                        <a href="#" class="footer-link">Contact uploading and non-users</a>
+                    </div>
+                    
+                    <div class="text-center mt-3">
+                        <span class="footer-link">Meta © 2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

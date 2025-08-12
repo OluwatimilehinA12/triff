@@ -1,0 +1,382 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Facebook Ad | Meta Business</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --facebook-blue: #1877f2;
+            --facebook-green: #42b72a;
+            --text-primary: #1c1e21;
+            --text-secondary: #65676b;
+            --border-color: #dadde1;
+            --bg-color: #f0f2f5;
+        }
+        
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: #f5f6f8;
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 10px 0;
+        }
+        
+        .logo {
+            color: var(--facebook-blue);
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .sidebar {
+            background-color: white;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            box-shadow: 1px 0 3px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-item {
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .sidebar-item:hover {
+            background-color: #f0f2f5;
+        }
+        
+        .sidebar-item.active {
+            background-color: #e7f3ff;
+            color: var(--facebook-blue);
+            font-weight: bold;
+        }
+        
+        .sidebar-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .ad-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .ad-preview {
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .form-control, .form-select {
+            padding: 10px 15px;
+            border-radius: 6px;
+        }
+        
+        .btn-primary {
+            background-color: var(--facebook-blue);
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+        
+        .btn-outline-primary {
+            color: var(--facebook-blue);
+            border-color: var(--facebook-blue);
+            font-weight: 600;
+        }
+        
+        .btn-success {
+            background-color: var(--facebook-green);
+            border: none;
+            font-weight: 600;
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 992px) {
+            .sidebar {
+                height: auto;
+                position: relative;
+                margin-bottom: 20px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .ad-preview {
+                min-height: 200px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand logo" href="#">
+                <i class="fab fa-facebook-square"></i> Meta Business
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                        <i class="fas fa-question-circle"></i> Help
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'index'%}"><i class="fas fa-book me-2"></i> Help Center</a></li>
+                        <li><a class="dropdown-item" href="{% url 'index'%}"><i class="fas fa-comments me-2"></i> Support Inbox</a></li>
+                    </ul>
+                </div>
+                <div class="ms-3">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i> Save Draft
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 p-0">
+                <div class="sidebar p-3">
+                    <div class="sidebar-item active">
+                        <i class="fas fa-ad"></i> Create Ad
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-bullhorn"></i> Campaigns
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-layer-group"></i> Ad Sets
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-ad"></i> Ads
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-chart-line"></i> Insights
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-tools"></i> Tools
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-cog"></i> Settings
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-10 py-4">
+                <div class="container">
+                    <h2 class="mb-4">Create New Ad</h2>
+                    
+                    <div class="row">
+                        <!-- Left Column - Form -->
+                        <div class="col-lg-7">
+                            <div class="ad-card">
+                                <h5 class="mb-4">1. Campaign Details</h5>
+                                <div class="mb-3">
+                                    <label class="form-label">Campaign Objective</label>
+                                    <select class="form-select">
+                                        <option selected>Select objective</option>
+                                        <option>Brand awareness</option>
+                                        <option>Reach</option>
+                                        <option>Traffic</option>
+                                        <option>Engagement</option>
+                                        <option>App installs</option>
+                                        <option>Video views</option>
+                                        <option>Lead generation</option>
+                                        <option>Messages</option>
+                                        <option>Conversions</option>
+                                        <option>Catalog sales</option>
+                                        <option>Store traffic</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Campaign Name</label>
+                                    <input type="text" class="form-control" placeholder="E.g. Summer Sale 2023">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Special Ad Category</label>
+                                    <select class="form-select">
+                                        <option selected>None</option>
+                                        <option>Credit</option>
+                                        <option>Employment</option>
+                                        <option>Housing</option>
+                                        <option>Social issues, elections or politics</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="ad-card mt-4">
+                                <h5 class="mb-4">2. Audience Targeting</h5>
+                                <div class="mb-3">
+                                    <label class="form-label">Locations</label>
+                                    <input type="text" class="form-control" placeholder="Add countries, cities or regions">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Age</label>
+                                    <div class="d-flex align-items-center">
+                                        <input type="number" class="form-control" placeholder="18" min="13" max="65">
+                                        <span class="mx-2">to</span>
+                                        <input type="number" class="form-control" placeholder="65" min="13" max="65">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Gender</label>
+                                    <div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="allGenders" checked>
+                                            <label class="form-check-label" for="allGenders">All</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="male">
+                                            <label class="form-check-label" for="male">Men</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="female">
+                                            <label class="form-check-label" for="female">Women</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Detailed Targeting</label>
+                                    <textarea class="form-control" rows="3" placeholder="Interests, behaviors or demographics"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="ad-card mt-4">
+                                <h5 class="mb-4">3. Budget & Schedule</h5>
+                                <div class="mb-3">
+                                    <label class="form-label">Budget Type</label>
+                                    <div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="budgetType" id="dailyBudget" checked>
+                                            <label class="form-check-label" for="dailyBudget">Daily</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="budgetType" id="lifetimeBudget">
+                                            <label class="form-check-label" for="lifetimeBudget">Lifetime</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Budget Amount (USD)</label>
+                                    <input type="number" class="form-control" placeholder="E.g. 20">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Schedule</label>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label class="form-label">Start Date</label>
+                                            <input type="date" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">End Date</label>
+                                            <input type="date" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="ad-card mt-4">
+                                <h5 class="mb-4">4. Ad Creative</h5>
+                                <div class="mb-3">
+                                    <label class="form-label">Ad Format</label>
+                                    <select class="form-select">
+                                        <option selected>Single image or video</option>
+                                        <option>Carousel</option>
+                                        <option>Collection</option>
+                                        <option>Instant experience</option>
+                                        <option>Stories</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Media</label>
+                                    <div class="border rounded p-3 text-center" style="cursor: pointer;">
+                                        <i class="fas fa-cloud-upload-alt fa-3x text-muted"></i>
+                                        <p class="mt-2">Upload images or videos</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Primary Text</label>
+                                    <textarea class="form-control" rows="3" placeholder="What do you want to say?"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Headline</label>
+                                    <input type="text" class="form-control" placeholder="Add a headline">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Call to Action</label>
+                                    <select class="form-select">
+                                        <option selected>Choose a button</option>
+                                        <option>Shop Now</option>
+                                        <option>Learn More</option>
+                                        <option>Sign Up</option>
+                                        <option>Download</option>
+                                        <option>Book Now</option>
+                                        <option>Contact Us</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-end mt-4">
+                                <button class="btn btn-outline-primary me-3">Cancel</button>
+                                <button class="btn btn-success">Publish Ad</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column - Preview -->
+                        <div class="col-lg-5">
+                            <div class="sticky-top" style="top: 80px;">
+                                <div class="ad-card">
+                                    <h5 class="mb-4">Ad Preview</h5>
+                                    <div class="ad-preview">
+                                        <i class="fas fa-ad fa-4x text-muted mb-3"></i>
+                                        <p class="text-muted">Your ad preview will appear here</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="ad-card mt-4">
+                                    <h5 class="mb-4">Delivery Insights</h5>
+                                    <div class="text-center py-4">
+                                        <i class="fas fa-chart-pie fa-3x text-muted mb-3"></i>
+                                        <p class="text-muted">Estimated results will appear after you complete targeting</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

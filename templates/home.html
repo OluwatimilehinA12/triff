@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Job Advertising</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #10b981;
+            --accent-color: #ef4444;
+            --dark-color: #1e293b;
+            --light-gray: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            background-color: white;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--dark-color);
+            font-size: 1.5rem;
+        }
+        
+        .progress-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--border-color);
+            z-index: 1;
+            transform: translateY(-50%);
+        }
+        
+        .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 20%;
+        }
+        
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active .step-circle {
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        
+        .step.completed .step-circle {
+            background-color: var(--secondary-color);
+            box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+        }
+        
+        .step-text {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active .step-text {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .step.completed .step-text {
+            color: var(--secondary-color);
+        }
+        
+        .product-card {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            height: 100%;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary-color);
+        }
+        
+        .product-card.best-value::after {
+            content: 'Best Value';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-card h3 {
+            color: var(--dark-color);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .product-card .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+        
+        .product-card .btn-select {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .product-card .btn-select:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            color: var(--dark-color);
+            font-weight: 600;
+            margin: 2rem 0 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+        
+        .addon-card {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .addon-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .addon-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .addon-card .price {
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+        
+        .summary-box {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.75rem 2rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+        
+        .alert-custom {
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .language-selector {
+            background-color: transparent;
+            border: 1px solid #94a3b8;
+            color: white;
+            border-radius: 6px;
+            padding: 0.375rem 0.75rem;
+        }
+        
+        .badge-tag {
+            background-color: #e0f2fe;
+            color: var(--primary-color);
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        @media (max-width: 768px) {
+            .progress-steps {
+                flex-wrap: wrap;
+            }
+            
+            .step {
+                width: 33.33%;
+                margin-bottom: 1.5rem;
+            }
+            
+            .product-card {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-briefcase me-2"></i>Professional<span class="text-primary">Jobs</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <select class="language-selector btn btn-primary">
+                        <option>HU</option>
+                        <option selected>EN</option>
+                    </select>
+                </div>
+                <div>
+                    <a href="/index" class="btn btn-outline-primary me-2 d-none d-md-inline-block">Log In</a>
+                    <a href="/index" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-4">
+        <!-- Progress Steps -->
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="step completed">
+                    <div class="step-circle"><i class="fas fa-check"></i></div>
+                    <div class="step-text">Ad Content</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-circle"><i class="fas fa-check"></i></div>
+                    <div class="step-text">Ad Details</div>
+                </div>
+                <div class="step active">
+                    <div class="step-circle">3</div>
+                    <div class="step-text">Preview</div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">4</div>
+                    <div class="step-text">Registration</div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">5</div>
+                    <div class="step-text">Payment</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Check -->
+        <div class="alert alert-info alert-custom mb-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="mb-2 mb-md-0">
+                    <i class="fas fa-user-circle me-2"></i>
+                    <strong>Have an account?</strong> Log in to save your information and access your dashboard.
+                </div>
+                <div>
+                    <a href="/index" class="btn btn-outline-primary me-2">Log In</a>
+                    <!-- <a href="#" class="btn btn-primary">Continue as Guest</a>-->
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Select Your Advertising Package</h2>
+        <p class="text-muted mb-4">Step 1 of 8 - Choose the right solution for your hiring needs</p>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-custom">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-star me-3 fa-lg text-warning"></i>
+                        <div>
+                            <strong class="d-block mb-1">Try our Premium Complex range!</strong>
+                            Access Hungary's largest CV database with over 700,000 professionals in addition to standard job posting features.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complex Recruitment Products -->
+        <h3 class="section-title">Premium Recruitment Solutions</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="product-card best-value">
+                    <span class="badge-tag">MOST POPULAR</span>
+                    <h3>Pro+ Complex</h3>
+                    <p class="text-muted">Our most comprehensive solution with premium job ad placement and 14-day access to Hungary's largest CV database for one user.</p>
+                    <div class="price">295 000 Ft <small>+ VAT</small></div>
+                    <div class="mb-3">
+                        <small class="text-success"><i class="fas fa-check-circle"></i> Includes all basic features</small><br>
+                        <small class="text-success"><i class="fas fa-check-circle"></i> Priority placement</small><br>
+                        <small class="text-success"><i class="fas fa-check-circle"></i> Advanced analytics</small>
+                    </div>
+                    <button class="btn btn-select w-100">Select Package</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="product-card">
+                    <h3>Optimum Complex</h3>
+                    <p class="text-muted">Optimal solution for diverse position types with 14-day CV database access for one user.</p>
+                    <div class="price">237 000 Ft <small>+ VAT</small></div>
+                    <div class="mb-3">
+                        <small class="text-success"><i class="fas fa-check-circle"></i> Includes all basic features</small><br>
+                        <small class="text-success"><i class="fas fa-check-circle"></i> Enhanced visibility</small><br>
+                        <small class="text-success"><i class="fas fa-check-circle"></i> Standard analytics</small>
+                    </div>
+                    <button class="btn btn-select w-100">Select Package</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="product-card">
+                    <h3>Start Premium Complex</h3>
+                    <p class="text-muted">Essential solution for physical and professional jobs with 14-day CV database access.</p>
+                    <div class="price">139 000 Ft <small>+ VAT</small></div>
+                    <div class="mb-3">
+                        <small class="text-success"><i class="fas fa-check-circle"></i> Basic features</small><br>
+                        <small class="text-success"><i class="fas fa-check-circle"></i> Standard placement</small><br>
+                        <small class="text-success"><i class="fas fa-check-circle"></i> Basic reporting</small>
+                    </div>
+                    <button class="btn btn-select w-100">Select Package</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advertising Products -->
+        <h3 class="section-title">Standard Advertising Packages</h3>
+        <p class="text-muted mb-4">Choose the package that best matches your recruitment needs and budget</p>
+        
+        <div class="row">
+            <div class="col-md-3">
+                <div class="product-card">
+                    <h3>Pro+</h3>
+                    <p class="text-muted small">Premium job advertising with maximum visibility</p>
+                    <div class="price">249 000 Ft <small>+ VAT</small></div>
+                    <button class="btn btn-select w-100 mt-2">Select</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product-card">
+                    <h3>Optimum</h3>
+                    <p class="text-muted small">Versatile solution for all position types</p>
+                    <div class="price">178 000 Ft <small>+ VAT</small></div>
+                    <button class="btn btn-select w-100 mt-2">Select</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product-card">
+                    <h3>Classic</h3>
+                    <p class="text-muted small">Cost-effective solution with essential features</p>
+                    <div class="price">153 000 Ft <small>+ VAT</small></div>
+                    <button class="btn btn-select w-100 mt-2">Select</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product-card">
+                    <h3>Start</h3>
+                    <p class="text-muted small">Basic package for simple hiring needs</p>
+                    <div class="price">52 000 Ft <small>+ VAT</small></div>
+                    <button class="btn btn-select w-100 mt-2">Select</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Efficiency Boosters -->
+        <h3 class="section-title">Efficiency Boosters</h3>
+        <p class="text-muted mb-4">Enhance your recruitment campaign with these powerful add-ons</p>
+        
+        <div class="row">
+            <div class="col-md-3 col-6">
+                <div class="addon-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h4>Facebook Ads</h4>
+                            <div class="price">80 000 Ft <small>+ VAT</small></div>
+                        </div>
+                        <i class="fas fa-info-circle text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Targeted Facebook advertising for your job posting"></i>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm w-100 mt-3">Add to Package</button>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="addon-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h4>List Highlighting</h4>
+                            <div class="price">55 000 Ft <small>+ VAT</small></div>
+                        </div>
+                        <i class="fas fa-info-circle text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Make your listing stand out in search results"></i>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm w-100 mt-3">Add to Package</button>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="addon-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h4>Candidate Match</h4>
+                            <div class="price">20 000 Ft <small>+ VAT</small></div>
+                        </div>
+                        <i class="fas fa-info-circle text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Get recommendations for ideal candidates"></i>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm w-100 mt-3">Add to Package</button>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="addon-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h4>Turbo Boost</h4>
+                            <div class="price">35 000 Ft <small>+ VAT</small></div>
+                        </div>
+                        <i class="fas fa-info-circle text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Increase your listing's visibility for 7 days"></i>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm w-100 mt-3">Add to Package</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Box -->
+        <div class="summary-box">
+            <div class="row align-items-center mb-4">
+                <div class="col-md-8">
+                    <h3 class="mb-0">Your Selection Summary</h3>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <span class="badge bg-light text-dark"><i class="fas fa-lock me-1"></i> Secure Checkout</span>
+                </div>
+            </div>
+            
+            <div class="alert alert-light">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-shopping-cart fa-lg me-3 text-muted"></i>
+                    <div>
+                        <strong>Your cart is empty</strong>
+                        <p class="mb-0">Select a package and any add-ons to continue</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-grid">
+                <button class="btn btn-primary btn-lg py-3">
+                    <i class="fas fa-arrow-right me-2"> <a href="/index" class="me-2 text-white">Continue to Job Details</a></i>
+                </button>
+            </div>
+            
+            <div class="mt-3 text-center">
+                <small class="text-muted"><i class="fas fa-shield-alt me-1"></i> All transactions are secure and encrypted</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-3">ProfessionalJobs</h5>
+                    <p class="text-muted">Hungary's leading recruitment platform connecting employers with top talent since 2005.</p>
+                    <div class="mt-4">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h6 class="mb-3">For Employers</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Browse CVs</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Recruitment Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h6 class="mb-3">Resources</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">HR Tools</a></li>
+                        <li><a href="#">Salary Calculator</a></li>
+                        <li><a href="#">Market Reports</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h6 class="mb-3">Company</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h6 class="mb-3">Legal</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <small class="text-muted">© 2025 ProfessionalJobs. All rights reserved.</small>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="me-3"><img src="https://via.placeholder.com/120x40?text=App+Store" alt="App Store" height="30"></a>
+                    <a href="#"><img src="https://via.placeholder.com/120x40?text=Google+Play" alt="Google Play" height="30"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+        
+        // Add animation to product cards when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.product-card, .addon-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
